@@ -2,9 +2,89 @@
 <html>
 	<head>
 		<meta charset="utf8">
-
+		<script src="bower_components/underscore/underscore.js"></script>
+		<script src="index.js"></script>
+		<style>
+			.boxcontainer{
+				display: -webkit-box;
+				display: -moz-box;
+			}
+			h2{ background:#CCC; }
+		</style>
 	</head>
 	<body>
-		underscore test
+		<script>
+			function getData(){
+				return [
+					{
+						id: 1,
+						name: 'yamada',
+						age: 15,
+						gender: 'male',
+						score: 30,
+						num: [11,12,21,10]
+					},
+					{
+						id: 2,
+						name: 'suzuki',
+						age: 46,
+						gender: 'male',
+						score: 55,
+						num: [85,11,4,30]
+					},
+					{
+						id: 3,
+						name: 'yasuda',
+						age: 38,
+						gender: 'male',
+						score: 45,
+						num: [56,32,17,90]
+					}
+				];
+			}
+
+			document.write('<p id="top"></p>');
+
+			document.write('<div class="boxcontainer">');
+			document.write('<div class="box" style="width:200px">');
+			_.each(getData(), function(item){
+				document.write('{<br>');
+				_.each(item,function(value,key){
+					document.write('  ' + key + ':<span style="color:blue">' + value + '</span><br>');
+				});
+				document.write('},<br>');
+			});
+			document.write('</div>');
+
+
+			document.write('<div class="box" style="width:200px;">');
+			document.write('<ul>');
+			_.each(func, function(item, key){
+				document.write('<li><a href="#' + key + '">' + key + '</a></li>');
+			});
+			document.write('</ul>');
+			document.write('</div>');
+
+			var data;
+			document.write('<div class="box" style="width:500px;">');
+			_.each(func, function(item, key){
+				document.write('<h2 id="' + key + '">' + key + '</h2>');
+				document.write('<h4>source</h4>');
+				var src = item.toString().split('\n');
+				_.each(src, function(row, i){
+					if (i==0 || i==src.length-1) return;
+					document.write(row + '<br>');
+				});
+
+				document.write('<h4>result</h4>');
+				data = getData();
+				document.write(func[key]());
+
+				document.write('<br /><div style="text-align:right;"><a href="#top">top</a></div>');
+			});
+
+			document.write('</div>');
+			document.write('</div>');
+		</script>
 	</body>
 </html>
